@@ -1,4 +1,5 @@
-﻿(function (global, ng, undefined) {
+﻿"use strict";
+(function (global, ng, undefined) {
 
     ng.module("app")
         .controller("appcontroller", ["$scope", "common", "datastore", appcontroller]);

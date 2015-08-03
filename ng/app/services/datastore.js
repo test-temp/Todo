@@ -1,4 +1,5 @@
-﻿(function (global, ng, undefined) {
+﻿"use strict";
+(function (global, ng, undefined) {
 
     ng.module("app")
         .factory("datastore", ['$window', datastore]);

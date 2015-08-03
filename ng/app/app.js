@@ -1,4 +1,5 @@
-﻿(function (global, ng, undefined) {
+﻿"use strict";
+(function (global, ng, undefined) {
 
     ng.module("app", ['ui.bootstrap']);
     //    .factory("lodash", ["$window", lodash]);

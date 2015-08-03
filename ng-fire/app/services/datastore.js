@@ -1,4 +1,5 @@
-﻿(function (global, ng, undefined) {
+﻿"use strict";
+(function (global, ng, undefined) {
 
     ng.module("app")
         .constant("FIREBASE_URL", "https://popping-heat-9361.firebaseio.com/")

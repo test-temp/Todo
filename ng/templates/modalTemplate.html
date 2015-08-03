@@ -1,0 +1,80 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title}}</h3>
+    </div>
+    <div class="modal-body">
+
+        <form name="addNewTaskForm">
+            <div class="form-group">
+                <label for="newTask">Task:</label>
+                <!--<input type="text" class="form-control"
+                       name="newTask" id="newTask" ng-model="mod.Todo.task" placeholder="Task" required   ng-minlength="0" ng-maxlength="140">-->
+
+                <textarea rows="4" cols="50" class="form-control"
+                          name="newTask" id="newTask"
+                          ng-model="mod.Todo.task" 
+                          required ng-minlength="0" 
+                          ng-maxlength="140"></textarea>
+            </div>
+            <div>
+                <span class="error" ng-show="myForm.lastName.$error.minlength">
+                    Too short!
+                </span>
+                <span class="alert alert-danger" ng-show="addNewTaskForm.newTask.$error.maxlength">
+                    Maximum text length is 140 characters.
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="priorities">Priority:</label>
+                <select class="form-control" ng-model="mod.Todo.priority" ng-options="p.value for p in mod.priorities"></select>
+            </div>
+
+
+           
+
+            <div class="form-group">
+                <label for="startdate">Start Date:</label>
+                <p class="input-group">
+                    <input type="text" id="startdate" name="startdate" class="form-control"
+                           datepicker-popup="{{mod.format}}"
+                           ng-model="mod.Todo.startDate"
+                           is-open="mod.isStartDate"
+                           min-date="mode.minDate"
+                           max-date="'2015-12-31'"
+                           datepicker-options="mod.dateOptions"
+                           date-disabled="mod.disabled(date, mode)"
+                           ng-required="true"
+                           close-text="mod.Close"
+                           readonly />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="mod.open($event,'start')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="finishdate">Finish Date:</label>
+                <p class="input-group">
+                    <input type="text" id="finishdate" name="finishdate" class="form-control"
+                           datepicker-popup="{{mod.format}}"
+                           ng-model="mod.Todo.finishDate"
+                           is-open="mod.isFinishDate"
+                           min-date="mode.minDate"
+                           max-date="'2015-12-31'"
+                           datepicker-options="mod.dateOptions"
+                           date-disabled="mod.disabled(date, mode)"
+                           ng-required="true"
+                           close-text="mod.Close"
+                           readonly />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="mod.open($event,'finish')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="addNewTaskForm.$invalid" ng-click="mod.ok(mod.Todo)">OK</button>
+        <button class="btn btn-warning" ng-click="mod.cancel()">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Todo App</title>
+
+    <link href="styles/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="styles/to-do.css" rel="stylesheet" />
+    <link href="styles/toastr.min.css" rel="stylesheet" />
+    <link href="styles/appstyle.css" rel="stylesheet" />
+
+</head>
+<body ng-app="app">
+
+
+    <div id="mainContainer" class="container-fluid" ng-controller="appcontroller as appctrl">
+
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <section class="task-panel tasks-widget">
+                    <div class="panel-heading">
+                        <div class="pull-left"><h4><i class="glyphicon glyphicon-tasks"></i>&nbsp&nbspTodo List</h4></div>
+                        <div class="dropdown pull-right">
+                            <button class="btn btn-default dropdown-toggle"
+                                    ng-disable="appctrl.todos.length"
+                                    type="button" id="sortby"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="true">
+                                Sort By<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="sortby">
+                                <li><a href="#" ng-click="appctrl.orderTasks('startDate')">Latest Date</a></li>
+                                <li><a href="#" ng-click="appctrl.orderTasks('priority')">Priority</a></li>
+                                <li><a href="#" ng-click="appctrl.orderTasks('none')">None</a></li>
+                            </ul>
+                        </div>
+                        <br>
+                        <div class="form-group" ng-if="appctrl.todos.length" style="margin-top:30px;">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                                <input type="text" class="form-control" id="todoSearch" ng-model="appctrl.todoSearch" placeholder="Search.....">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="task-content">
+
+
+                            
+
+                            <div class="alert alert-info" ng-if="!appctrl.todos.length" role="alert">No Task Available. To add new task click Add New Tasks</div>
+
+                            <ul class="task-list">
+                                <li ng-repeat="t in  appctrl.todos | orderBy:appctrl.currentOrderBy |filter:{task:appctrl.todoSearch} ">
+                                    <div class="task-checkbox">
+                                        <input type="checkbox" class="list-child" ng-model="t.isDone" value="" ng-click="appctrl.udpateStatus(t)">
+                                    </div>
+                                    <div class="task-title">
+                                        <p>
+
+                                            <span class="task-title-sp" data-ng-class="{'done-true':t.isDone}">{{t.task}}</span>
+                                            <div class="pull-right">
+                                                <button class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil" ng-click="appctrl.edit(t)"></i></button>
+                                                <button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash" ng-click="appctrl.delete(t)"></i></button>
+                                            </div>
+                                        </p>
+
+                                        <p>
+                                            <span class="label label-default" ng-bind="t.finishDate |  date:'dd-MM-yyyy'"></span>
+                                            <span class="label label-danger" ng-if="t.priority.key === 3" ng-bind="t.priority.value"></span>
+                                            <span class="label label-warning" ng-if="t.priority.key === 2" ng-bind="t.priority.value"></span>
+                                            <span class="label label-info" ng-if="t.priority.key === 1" ng-bind="t.priority.value"></span>
+                                        </p>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="add-task-row">
+                            <button type="button" class="btn btn-success btn-sm pull-left" ng-click="appctrl.addNewTask();">Add New Tasks</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+</body>
+
+<!--vendor scripts-->
+<script src="scripts/jquery-2.1.4.min.js"></script>
+<!--<script src="scripts/lodash.js"></script>-->
+<script src="scripts/toastr.min.js"></script>
+<script src="scripts/angular/angular.min.js"></script>
+<script src="scripts/bootstrap/bootstrap.min.js"></script>
+<script src="scripts/ngbootstrapui.js"></script>
+<script src="scripts/firebase.js"></script>
+<script src="scripts/angularfire.min.js"></script>
+
+<!--app scripts-->
+<script src="app/app.js"></script>
+
+<script src="app/controllers/appcontroller.js"></script>
+<script src="app/controllers/modalcontroller.js"></script>
+<script src="app/controllers/confirmController.js"></script>
+
+<script src="app/services/toastr.js"></script>
+<script src="app/services/common.js"></script>
+<script src="app/services/datastore.js"></script>
+
+
+</html>
